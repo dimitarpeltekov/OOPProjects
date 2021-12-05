@@ -1,4 +1,4 @@
-package Polymorphism.vehicles;
+package Polymorphism.demo.vehicles;
 
 public interface Vehicle {
     String drive(double distance);

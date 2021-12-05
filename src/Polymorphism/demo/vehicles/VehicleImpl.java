@@ -1,14 +1,16 @@
-package Polymorphism.vehicles;
+package Polymorphism.demo.vehicles;
 
 import java.text.DecimalFormat;
 
-public abstract class VehicleImpl implements Vehicle{
+public  class VehicleImpl implements Vehicle{
     private double fuelQuantity;
     private double fuelConsumption;
+    private double tankCapacity;
 
-    public VehicleImpl(double fuelQuantity, double fuelConsumption) {
+    protected VehicleImpl(double fuelQuantity, double fuelConsumption,double tankCapacity) {
         this.fuelQuantity = fuelQuantity;
         this.setFuelConsumption(fuelConsumption);
+        this.tankCapacity = tankCapacity;
     }
 
     public double getFuelQuantity() {
@@ -31,16 +33,29 @@ public abstract class VehicleImpl implements Vehicle{
     public String drive(double distance) {
         double fuelNeeded = distance*getFuelConsumption();
         if(fuelNeeded>this.getFuelQuantity()){
-            return String.format("%s needs refueling",this.getClass().getName()) ;
+            return String.format("%s needs refueling",this.getClass().getSimpleName()) ;
         }
         this.setFuelQuantity(this.getFuelQuantity()-fuelNeeded);
         DecimalFormat formatter = new DecimalFormat("##.##");
-        return String.format("%s travelled %s km",this.getClass().getName(),formatter.format(distance));
+        return String.format("%s travelled %s km",this.getClass().getSimpleName(),formatter.format(distance));
 
     }
 
     @Override
     public void refuel(double litters) {
-       setFuelQuantity(getFuelQuantity()+litters);
+        if(litters <= 0) {
+            throw  new IllegalArgumentException("Fuel must be a positive number");
+        }
+       double newFelQuantity = this.fuelQuantity+litters;
+        if (newFelQuantity>this.tankCapacity){
+            throw new IllegalArgumentException("Cannot fit fuel in tank");
+        }
+
+        this.fuelQuantity+=litters;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s: %.2f",this.getClass().getSimpleName(),this.fuelQuantity);
     }
 }
