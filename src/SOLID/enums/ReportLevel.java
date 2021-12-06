@@ -1,5 +1,5 @@
 package SOLID.enums;
 
-public enum ReportLevelEnum {
+public enum ReportLevel {
     INFO,WARNING,ERROR,CRITICAL,FATAL
 }
