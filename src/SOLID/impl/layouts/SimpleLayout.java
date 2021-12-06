@@ -1,4 +1,4 @@
-package SOLID.impl;
+package SOLID.impl.layouts;
 
 import SOLID.enums.ReportLevel;
 import SOLID.interfaces.Layout;
