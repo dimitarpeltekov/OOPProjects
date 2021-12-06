@@ -1,4 +1,4 @@
-package Polymorphism.demo.vehicles;
+package Polymorphism.vehicles;
 
 public class Bus extends VehicleImpl{
     private static final double AC_ADDITIONAL_CONSUMPTION = 1.4;
@@ -15,5 +15,9 @@ public class Bus extends VehicleImpl{
     if(!this.isEmpty){
         super.setFuelConsumption(fuelConsumption+AC_ADDITIONAL_CONSUMPTION);
     }
+    }
+
+    public void setEmpty(boolean empty) {
+        isEmpty = empty;
     }
 }

@@ -1,4 +1,4 @@
-package Polymorphism.demo.vehicles;
+package Polymorphism.vehicles;
 
 public class Car extends VehicleImpl{
     private static final double AC_ADDITIONAL_CONSUMPTION = 0.9;

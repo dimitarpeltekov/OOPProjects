@@ -1,6 +1,4 @@
-package Polymorphism.demo.vehicles;
-
-import org.jetbrains.annotations.NotNull;
+package Polymorphism.vehicles;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -30,30 +28,42 @@ public class Main {
             tokens = scanner.nextLine().split(" ");
             String commandName = tokens[0];
             String vehicleType = tokens[1];
-            switch (commandName){
-                case "Drive":
-                    double distance = Double.parseDouble(tokens[2]);
+            Vehicle vehicle = vehicles.get(vehicleType);
+            try {
+                switch (commandName) {
+                    case "Drive":
+                        double distance = Double.parseDouble(tokens[2]);
+                        if (vehicle instanceof Bus) {
+                            ((Bus) vehicle).setEmpty(false);
+                        }
+                        System.out.println(vehicle.drive(distance));
 
-                    System.out.println(vehicles.get(vehicleType).drive(distance));
+                        break;
+                    case "Refuel":
 
-                    break;
-                case "Refuel":
-                    double litters = Double.parseDouble(tokens[2]);
-                    vehicles.get(vehicleType).refuel(litters);
-                    break;
+                        double litters = Double.parseDouble(tokens[2]);
+
+                        vehicles.get(vehicleType).refuel(litters);
+
+
+                        break;
+
+                    case "DriveEmpty":
+                        double driveEmptyBusDistance = Double.parseDouble(tokens[2]);
+                        if (vehicle instanceof Bus) {
+                            ((Bus) vehicle).setEmpty(true);
+                        }
+                        System.out.println(vehicle.drive(driveEmptyBusDistance));
+                        break;
+                }
+            }catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
             }
-
-
-
         }
         vehicles.values().forEach(System.out::println);
-
-
-
-
     }
 
-    @NotNull
+
     private static Vehicle getVehicle(String[] tokens) {
       String vehicleType = tokens[0];
         double fuelAmount = Double.parseDouble(tokens[1]);
